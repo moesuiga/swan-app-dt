@@ -28,6 +28,11 @@ class IndexPage implements IPageClass {
     props.push('first prop');
     this.setData({ props })
   }
+
+  handleEvent(e: swan.IBaseEvent) {
+    const { name } = e.currentTarget.dataset;
+    console.log('name is ', name);
+  }
 }
 
 Page(new IndexPage())

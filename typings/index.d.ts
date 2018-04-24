@@ -1593,12 +1593,12 @@ declare namespace swan {
   /**
    * base事件参数
    */
-  interface IBaseEvent {
+  export interface IBaseEvent {
     /**
      * 事件类型
      */
-    // type: string; // 百度小程序 无该属性
-    // timeStamp: number; // 百度小程序 无该属性
+    type?: string;
+    timeStamp?: number;
     /**
      * 触发事件的源组件。
      */
@@ -1609,7 +1609,7 @@ declare namespace swan {
     currentTarget: IEventTarget;
   }
 
-  interface ICustomEvent<P extends IData = IData> extends IBaseEvent {
+  export interface ICustomEvent<P extends IData = IData> extends IBaseEvent {
     /**
      * 额外的信息
      */
@@ -1617,12 +1617,21 @@ declare namespace swan {
   }
 
   /**
+   * switch 组件 change 事件参数
+   * 官方文档的坑: 抄微信的文档 说e.detail = { value: checked }
+   * 实际打印出来是 e = { checked: checked }
+   */
+  export interface ISwitchEvent {
+    checked: boolean;
+  }
+
+  /**
    * 触摸事件返回
+   * 并没有detail属性
    */
   export interface ITouchEvent<
-    P extends swan.IData = swan.IData,
     T extends IEventTouch = IEventTouch
-  > extends ICustomEvent<P> {
+  > extends IBaseEvent {
     // touches: T[]; // 百度小程序touch对象暂无该属性
     changedTouches: T[];
   }
