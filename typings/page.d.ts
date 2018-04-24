@@ -40,7 +40,7 @@ declare interface PageOptions<P extends Page = Page, Data = DefaultData<P>> {
   onUnload?(): void;
 }
 
-declare interface IPage {
+declare interface IPage extends PageOptions {
   /**
    * 将数据从逻辑层发送到视图层，同时改变对应的数据
    */
