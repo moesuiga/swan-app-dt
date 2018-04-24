@@ -1138,6 +1138,31 @@ declare namespace swan {
     url: string;
   }
 
+  interface ISelectorQuery {
+    /**
+     * 在当前页面下选择第一个匹配选择器selector的节点，返回一个NodesRef对象实例，可以用于获取节点信息。
+     *
+     * 以上是微信小程序文档的说明，百度目前的实现是 `document.querySelector`，
+     * 而且实际测试发现也得不到想要的结果。
+     * 在控制台打印`document`可以发现在body中只有两个`script`和一个`div#san_devtool_highlighter`。
+     * 通过该方法能得到的也只有`script`和`div#san_devtool_highlighter`。
+     * 传入其他的页面上有的类名、ID名等都无法获得该元素。
+     * @param selector 类似于CSS的选择器
+     */
+    select: (selector: string) => null | HTMLElement;
+    /**
+     * 在当前页面下选择匹配选择器selector的节点，返回一个NodesRef对象实例。 与selectorQuery.select(selector)不同的是，它选择所有匹配选择器的节点。
+     *
+     * 以上是微信小程序文档的说明，百度目前的实现是 `document.querySelectorAll`，
+     * 而且实际测试发现也得不到想要的结果。
+     * 在控制台打印`document`可以发现在body中只有两个`script`和一个`div#san_devtool_highlighter`。
+     * 通过该方法能得到的也只有`script`和`div#san_devtool_highlighter`。
+     * 传入其他的页面上有的类名、ID名等都无法获得该元素。
+     * @param selector 类似于CSS的选择器
+     */
+    selectAll: (selector: string) => HTMLElement[];
+  }
+
   interface ILoginOptions extends ICallback {
     success?(res: {
       /**
@@ -2141,6 +2166,12 @@ declare namespace swan {
    */
   export function reLaunch(options: INavigateOptions): void;
 
+  // ======== xml节点信息 ======== //
+
+  /**
+   * 创建查询对象
+   */
+  export function createSelectorQuery(): ISelectorQuery;
 
   // ======== 开发接口 ======== //
 
