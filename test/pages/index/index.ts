@@ -20,6 +20,8 @@ class IndexPage implements IPageClass {
     this.test = () => {
       console.log('this is a test method.')
     }
+    // this.abc = 1;
+    // this.noMethod();
   }
 
   @testDecorator()
