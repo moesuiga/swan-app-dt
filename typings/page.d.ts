@@ -17,7 +17,7 @@ declare type ThisTypedPageOptionsWithArrayProps<
  * Page 实现的接口对象
  */
 declare interface PageOptions<P extends Page = Page, Data = DefaultData<P>> {
-  [key: string]: any;
+  // [key: string]: any;
   /**
    * 生命周期函数--监听页面加载
    */
