@@ -1,40 +1,85 @@
-function testDecorator() {
-  console.log('test decorator');
-  return function (target: IndexPage, propertyKey: string, descriptor: PropertyDescriptor) {
-    console.log(target);
-  }
-}
 
-interface IndexPage extends IPage {}
-
-class IndexPage implements IPageClass {
+Page({
   data: {
-    props: string[]
-    version: string
-  } = {
-    props: [],
-    version: '1.0.0'
+    name: 'index'
+  },
+  onLoad(options) {
+    this.setData({
+      name: 'other name'
+    });
+    swan.request({
+      url: 'request:url',
+      data: {
+        key: 'value'
+      },
+      method: 'GET',
+      success(res) {
+        console.log('request success::', res);
+      },
+      fail(error) {
+        console.error('request fail::', error);
+      }
+    })
+  },
+  customMethod() {
+    const { name } = this.data;
+    name.toUpperCase();
   }
-  test: () => void;
-  onLoad(options: swan.IData) {
-    this.test = () => {
-      console.log('this is a test method.')
-    }
-    // this.abc = 1;
-    // this.noMethod();
-  }
+});
 
-  @testDecorator()
-  myMethod() {
-    const { props } = this.data;
-    props.push('first prop');
-    this.setData({ props })
-  }
+// 建议使用如下用法
+interface PageData {
+  name: string;
+}
 
-  handleEvent(e: swan.IBaseEvent) {
-    const { name } = e.currentTarget.dataset;
-    console.log('name is ', name);
+interface IndexPage extends Page.Options {
+  setData(
+    data: { [key in keyof PageData]?: PageData[key] },
+    callback?: () => void
+  ): void;
+}
+
+class IndexPage implements Page {
+  data: PageData = {
+    name: 'index'
+  }
+  onLoad(options: obj) {
+    this.setData({
+      name: 'must be string',
+      // name: false
+      // error: true
+    });
+    swan.request({
+      url: 'request:url',
+      data: {
+        key: 'value'
+      },
+      method: 'GET',
+      success(res) {
+        console.log('request success::', res);
+      },
+      fail(error) {
+        console.error('request fail::', error);
+      }
+    })
+  }
+  customMethod() {
+    const { name } = this.data;
+    name.toUpperCase();
+  }
+  pay() {
+    swan.requestPolymerPayment({
+      orderInfo: {
+        dealId: '',
+        dealTitle: '',
+        totalAmount: '23',
+        tpOrderId: 'a',
+        appKey: '',
+        rsaSign: '',
+        bizInfo: ''
+      }
+    })
   }
 }
 
-Page(new IndexPage())
+Page(new IndexPage());
