@@ -30,6 +30,7 @@ Page({
 // 建议使用如下用法
 interface PageData {
   name: string;
+  animation: any;
 }
 
 interface IndexPage extends Page.Options {
@@ -41,7 +42,8 @@ interface IndexPage extends Page.Options {
 
 class IndexPage implements Page {
   data: PageData = {
-    name: 'index'
+    name: 'index',
+    animation: null
   }
   onLoad(options: obj) {
     this.setData({
@@ -66,6 +68,11 @@ class IndexPage implements Page {
   customMethod() {
     const { name } = this.data;
     name.toUpperCase();
+    const anim = swan.createAnimation();
+    anim.width(100).height(200).step();
+    this.setData({
+      animation: anim.export()
+    })
   }
   pay() {
     swan.requestPolymerPayment({
