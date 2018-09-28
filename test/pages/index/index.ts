@@ -87,6 +87,11 @@ class IndexPage implements Page {
       }
     })
   }
+  call(phone: string) {
+    swan.makePhoneCall({
+      phoneNumber: phone
+    })
+  }
 }
 
 Page(new IndexPage());

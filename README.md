@@ -13,12 +13,12 @@
 
 ## Usage
 
-1.  参考 test:
+1. 参考 test:
 
 * [app.ts](https://github.com/moesuiga/swan-app-dt/blob/master/test/app.ts)
 * [page.ts](https://github.com/moesuiga/swan-app-dt/blob/master/test/pages/index/index.ts)
 
-2.  tsconfig 配置
+2. tsconfig 配置
 
 ```json
 {
@@ -59,9 +59,9 @@
   + [ ] 下拉刷新
   + [ ] 节点信息
 - [ ] 设备
-  + [ ] 系统信息
+  + [x] 系统信息
   + [ ] 内存
-  + [ ] 网络状态
+  + [x] 网络状态
   + [ ] 加速度计
   + [ ] 罗盘
   + [ ] 扫码
@@ -69,8 +69,8 @@
   + [ ] 用户截屏事件
   + [ ] 振动
   + [ ] 手机联系人
-  + [ ] 拨打电话
-  + [ ] 剪贴板
+  + [x] 拨打电话
+  + [x] 剪贴板
 - [ ] 第三方平台
 - [x] 开放接口
 - [ ] 更新
