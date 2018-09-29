@@ -1,83 +1,91 @@
+declare namespace Page {
+  type obj = {
+    [key: string]: any;
+  };
+  interface BaseOptions {
+    /**
+     * 监听页面加载的生命周期函数
+     */
+    onLoad?(options: obj): void;
+    /**
+     * 监听页面初次渲染完成的生命周期函数
+     */
+    onReady?(options: obj): void;
+    /**
+     * 监听页面显示的生命周期函数
+     */
+    onShow?(options: obj): void;
+    /**
+     * 监听页面隐藏的生命周期函数
+     */
+    onHide?(): void;
+    /**
+     * 监听页面卸载的生命周期函数
+     */
+    onUnload?(): void;
+    /**
+     * 监听用户下拉动作
+     */
+    onPullDownRefresh?(event: any): any;
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom?(event: any): any;
+    /**
+     * 监听用户滚动页面事件
+     */
+    onPageScroll?(event: {
+      /**
+       * 页面在垂直方向已滚动的距离（单位px）
+       */
+      scrollTop: number;
+    }): void;
+    /**
+     * 用户点击右上角转发
+     */
+    onShareAppMessage?(
+      options: any
+    ): {
+      /**
+       * 转发标题
+       * @default 当前的智能小程序的名称
+       */
+      title?: string;
+      /**
+       * 转发路径
+       * 当前页面 path ，必须是以 `/` 开头的完整路径
+       */
+      path?: string;
+    };
+    /**
+     * 错误监听函数
+     */
+    onError?(error: any): any;
+  }
 
-declare type CombinedPageInstance<Instance extends Page, Data, Method> = {
-  data: Data
-} & Instance &
-  Method &
-  swan.IData;
-
-declare type ThisTypedPageOptionsWithArrayProps<
-  P extends Page,
-  Data extends Record<string, any>,
-  Method
-> = PageOptions<P, Data> &
-  Method &
-  ThisType<CombinedPageInstance<P, Data, Method>>;
-
-/**
- * Page 实现的接口对象
- */
-declare interface PageOptions<P extends Page = Page, Data = DefaultData<P>> {
-  // [key: string]: any;
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad?(options: swan.IData): void;
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady?(options: swan.IData): void;
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow?(options: swan.IData): void;
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide?(): void;
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload?(): void;
+  interface Options extends BaseOptions {
+    /**
+     * 页面的初始数据
+     */
+    data: { [key: string]: any };
+    /**
+     * 其他的属性或方法
+     */
+    [key: string]: any;
+  }
 }
 
-declare interface IPage extends PageOptions {
-  /**
-   * 将数据从逻辑层发送到视图层，同时改变对应的数据
-   */
-  setData(data: swan.IData): void;
-  /**
-   * 当前页面的路径
-   */
-  uri: string;
-}
-
-declare interface Page extends IPage {}
-
-interface IPageClass extends PageOptions<IPage, object> {}
-
-declare type DefaultData<V> = object | ((this: V) => object);
-
-declare type DefaultMethods<V> = {
-  [key: string]: (this: V, ...args: any[]) => any;
-}
-
-/**
- * Page 的构造方法
- */
-declare interface IPageConstructor<P extends Page = Page> {
-  <Data = Record<string, any>, Method extends PageOptions = PageOptions>(
-    opts: ThisTypedPageOptionsWithArrayProps<P, Data, Method>
+interface Page extends Page.Options {
+  setData<T extends Page.Options['data'] = Page.Options['data']>(
+    data: { [key in keyof T]?: T[key] },
+    callback?: () => void
   ): void;
 }
+
+declare function Page(options: Page.Options): void;
 
 /**
  * getCurrentPages() 函数用于获取当前页面栈的实例，
  * 以数组形式按栈的顺序给出，第一个元素为首页，最后一个元素为当前页面。
  */
-declare function getCurrentPages(): CombinedPageInstance<
-  Page,
-  DefaultData<Page>,
-  DefaultMethods<Page>
->[]
-
-declare let Page: IPageConstructor;
+declare function getCurrentPages(): Page[];

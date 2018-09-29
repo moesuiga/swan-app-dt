@@ -1,6 +1,6 @@
 {
   "name": "swan-app-dt",
-  "version": "1.0.3",
+  "version": "2.0.1",
   "description": "基于百度小程序文档(结合微信小程序文档) 的 API DefinitelyTyped",
   "main": "./typings/index.d.ts",
   "scripts": {
@@ -17,7 +17,9 @@
   "devDependencies": {
     "tslint": "^5.9.1",
     "tslint-config-airbnb": "^5.8.0",
-    "tslint-config-prettier": "^1.12.0",
+    "tslint-config-prettier": "^1.12.0"
+  },
+  "dependencies": {
     "typescript": "^2.8.3"
   }
 }
