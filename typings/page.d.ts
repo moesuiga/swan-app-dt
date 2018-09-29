@@ -5,32 +5,55 @@ declare namespace Page {
   interface BaseOptions {
     /**
      * 监听页面加载的生命周期函数
+     *
+     * 一个页面只会调用一次，
+     * 可以在 onLoad 中获取打开当前页面所调用的 query 参数
      */
     onLoad?(options: obj): void;
     /**
      * 监听页面初次渲染完成的生命周期函数
+     *
+     * 一个页面只会调用一次，代表页面已经准备妥当，可以和视图层进行交互。
+     *
+     * 对界面的设置如：`swan.setNavigationBarTitle` 请在onReady之后设置。
      */
-    onReady?(options: obj): void;
+    onReady?(): void;
     /**
      * 监听页面显示的生命周期函数
+     *
+     * 每次打开页面都会调用一次。
      */
-    onShow?(options: obj): void;
+    onShow?(): void;
     /**
      * 监听页面隐藏的生命周期函数
+     *
+     * 当 navigateTo
+     * 或底部 tab 切换时
+     * 或Home键离开智能小程序时调用。
      */
     onHide?(): void;
     /**
      * 监听页面卸载的生命周期函数
+     *
+     * 当 `redirectTo` 或 `navigateBack` 的时候调用。
      */
     onUnload?(): void;
     /**
      * 监听用户下拉动作
+     *
+     * 需要在 app.json 的 window 选项中或页面配置中开启 `enablePullDownRefresh` 。
+     *
+     * 当处理完数据刷新后，`swan.stopPullDownRefresh` 可以停止当前页面的下拉刷新。
      */
-    onPullDownRefresh?(event: any): any;
+    onPullDownRefresh?(): any;
     /**
      * 页面上拉触底事件的处理函数
+     *
+     * 可以在 app.json 的 window 选项中或页面配置中设置触发距离 `onReachBottomDistance` 。
+     *
+     * 在触发距离内滑动期间，本事件只会被触发一次。
      */
-    onReachBottom?(event: any): any;
+    onReachBottom?(): any;
     /**
      * 监听用户滚动页面事件
      */
@@ -63,10 +86,6 @@ declare namespace Page {
         currentTarget?: obj;
       }
     ): ShareReturn;
-    /**
-     * 错误监听函数
-     */
-    onError?(error: any): any;
   }
 
   interface ShareReturn {
@@ -122,8 +141,18 @@ interface Page extends Page.Options {
     data: { [key in keyof T]?: T[key] },
     callback?: () => void
   ): void;
+
+  /**
+   * 创建绘图上下文
+   * @param {String} canvasId <canvas />组件的`canvas-id`属性的值
+   */
+  createCanvasContext?(canvasId: string): swan.createCanvasContext.CanvasContext;
 }
 
+/**
+ * Page 函数用来注册一个页面。接受一个 object 参数，其指定页面的初始数据、生命周期函数、事件处理函数等。
+ * @param {Page.Options} options
+ */
 declare function Page(options: Page.Options): void;
 
 /**

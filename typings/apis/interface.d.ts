@@ -1,11 +1,9 @@
 /// <reference path="./index.d.ts" />
+/// <reference path="./canvas.d.ts" />
 
 // 界面
 
 declare namespace swan {
-  // @todo
-  // ======== 绘图 ======== //
-
   // ======== 交互反馈 ======== //
   /**
    * 显示消息提示框
@@ -258,7 +256,7 @@ declare namespace swan {
   /**
    * 动态设置 tabBar 某一项的内容
    */
-  export function setTabBarItem(): void;
+  export function setTabBarItem(options: setTabBarItem.Options): void;
   namespace setTabBarItem {
     type Options = TabBar.CommonOptions & {
       /**
@@ -594,8 +592,256 @@ declare namespace swan {
   }
 
   // ======== 位置 ======== //
+  /**
+   * 将页面滚动到目标位置（可以设置滚动动画时长）。
+   */
+  export function pageScrollTo(options: pageScrollTo.Options): void;
+  namespace pageScrollTo {
+    type Options = {
+      /**
+       * 滚动到页面的目标位置（单位 px）
+       */
+      scrollTop: number;
+      /**
+       * 滚动动画的时长，（单位 ms）
+       * @default 300
+       */
+      duration?: number;
+    }
+  }
 
   // ======== 下拉刷新 ======== //
+  /**
+   * 开始下拉刷新，调用后触发下拉刷新动画，
+   * 效果与用户手动下拉刷新一致。
+   */
+  export function startPullDownRefresh(options: ApiCallback<{
+    /**
+     * 接口调用结果
+     */
+    errMsg: string
+  }>): void;
+
+  /**
+   * 停止当前页面下拉刷新。
+   */
+  export function stopPullDownRefresh(): void;
 
   // ======== 节点信息 ======== //
+  /**
+   * 返回一个 SelectorQuery 对象实例。
+   *
+   * 可以在这个实例上使用 `select` 等方法选择节点，
+   * 并使用 `boundingClientRect` 等方法选择需要查询的信息。
+   */
+  export function createSelectorQuery(): createSelectorQuery.SelectorQuery;
+  namespace createSelectorQuery {
+    interface SelectorQuery {
+      /**
+       * 将选择器的选取范围更改为自定义组件 component 内
+       * （初始时，选择器仅选取页面范围的节点，不会选取任何自定义组件中的节点）。
+       * @param component 自定义组件
+       */
+      in(component: any): SelectorQuery;
+      /**
+       * 在当前页面下选择第一个匹配选择器 selector 的节点，
+       *
+       * 返回一个 NodesRef 对象实例，可以用于获取节点信息
+       *
+       * selector 类似于 CSS 的选择器，但仅支持下列语法。
+       * 1. ID 选择器：`#the-id`
+       * 2. class 选择器（可以连续指定多个）：`.a-class.another-class`
+       * 3. 子元素选择器：`.the-parent > .the-child`
+       * 4. 后代选择器：`.the-ancestor .the-descendant`
+       * 5. 跨自定义组件的后代选择器：`.the-ancestor >>> .the-descendant`
+       * 6. 多选择器的并集：`#a-node, .some-other-nodes`
+       * @param selector CSS选择器
+       */
+      select(selector: string): NodeRef
+      /**
+       * 在当前页面下选择匹配选择器 selector 的节点，返回一个 NodesRef 对象实例。
+       *
+       * 与 selectorQuery.select(selector) 不同的是，它选择所有匹配选择器的节点。
+       *
+       * selector 类似于 CSS 的选择器，但仅支持下列语法。
+       * 1. ID 选择器：`#the-id`
+       * 2. class 选择器（可以连续指定多个）：`.a-class.another-class`
+       * 3. 子元素选择器：`.the-parent > .the-child`
+       * 4. 后代选择器：`.the-ancestor .the-descendant`
+       * 5. 跨自定义组件的后代选择器：`.the-ancestor >>> .the-descendant`
+       * 6. 多选择器的并集：`#a-node, .some-other-nodes`
+       * @param selector CSS选择器
+       */
+      selectAll(selector: string): NodeRefs;
+      /**
+       * 选择显示区域，
+       *
+       * 可用于获取显示区域的尺寸、滚动位置等信息，
+       *
+       * 返回一个NodesRef对象实例。
+       */
+      selectViewport(): NodeRef;
+      /**
+       * 执行所有的请求，请求结果按请求次序构成数组，
+       *
+       * 在 callback 的第一个参数中返回。
+       */
+      exec(callback?: cb<(NodeRect & NodeScrollRect & obj)[]>): void;
+    }
+
+    interface NodeRef {
+      /**
+       * 添加节点的布局位置的查询请求，
+       * 相对于显示区域，以像素为单位。
+       *
+       * 其功能类似于 DOM 的 getBoundingClientRect。
+       *
+       * 返回值是 nodesRef 对应的 selectorQuery。
+       * @param callback 回调
+       */
+      boundingClientRect(callback?: cb<NodeRect>): SelectorQuery;
+      /**
+       * 添加节点的滚动位置查询请求，以像素为单位。
+       *
+       * 节点必须是 scroll-view 或者 viewport 。
+       *
+       * 返回值是 nodesRef 对应的 selectorQuery 。
+       * @param callback 回调
+       */
+      scrollOffset(callback?: cb<NodeScrollRect>): SelectorQuery;
+      /**
+       * 获取节点的相关信息，
+       *
+       * 需要获取的字段在 fields 中指定。
+       *
+       * 返回值是 nodesRef 对应的 selectorQuery 。
+       * @param {NodeFields} fields 指定获取的字段
+       * @param {Function} callback 回调
+       */
+      fields(fields: NodeFields, callback?: cb<NodeRect & NodeScrollRect & obj>): SelectorQuery;
+    }
+    interface NodeRefs {
+      /**
+       * 添加节点的布局位置的查询请求，
+       * 相对于显示区域，以像素为单位。
+       *
+       * 其功能类似于 DOM 的 getBoundingClientRect。
+       *
+       * 返回值是 nodesRef 对应的 selectorQuery。
+       * @param callback 回调
+       */
+      boundingClientRect(callback?: cb<NodeRect[]>): SelectorQuery;
+      /**
+       * 添加节点的滚动位置查询请求，以像素为单位。
+       *
+       * 节点必须是 scroll-view 或者 viewport 。
+       *
+       * 返回值是 nodesRef 对应的 selectorQuery 。
+       * @param callback 回调
+       */
+      scrollOffset(callback?: cb<NodeScrollRect[]>): SelectorQuery;
+      /**
+       * 获取节点的相关信息，
+       *
+       * 需要获取的字段在 fields 中指定。
+       *
+       * 返回值是 nodesRef 对应的 selectorQuery 。
+       * @param {NodeFields} fields 指定获取的字段
+       * @param {Function} callback 回调
+       */
+      fields(fields: NodeFields, callback?: cb<(NodeRect & NodeScrollRect & obj)[]>): SelectorQuery;
+    }
+
+    interface NodeRect {
+      /**
+       * 节点的ID
+       */
+      id: string;
+      /**
+       * 节点的dataset
+       */
+      dataset: obj;
+      /**
+       * 节点的上边界坐标
+       */
+      top: number;
+      /**
+       * 节点的右边界坐标
+       */
+      right: number;
+      /**
+       * 节点的下边界坐标
+       */
+      bottom: number;
+      /**
+       * 节点的左边界坐标
+       */
+      left: number;
+      /**
+       * 节点的宽度
+       */
+      width: number;
+      /**
+       * 节点的高度
+       */
+      height: number;
+    }
+
+    interface NodeScrollRect {
+      /**
+       * 节点的ID
+       */
+      id: string;
+      /**
+       * 节点的dataset
+       */
+      dataset: obj;
+      /**
+       * 节点的水平滚动位置
+       */
+      scrollLeft: number;
+      /**
+       * 节点的竖直滚动位置
+       */
+      scrollTop: number;
+    }
+
+    interface NodeFields {
+      /**
+       * 是否返回节点 `id`
+       */
+      id?: boolean;
+      /**
+       * 是否返回节点 `dataset`
+       */
+      dataset?: boolean;
+      /**
+       * 是否返回节点布局位置（`left` `right` `top` `bottom`）
+       */
+      rect?: boolean;
+      /**
+       * 是否返回节点尺寸（`width` `height`）
+       */
+      size?: boolean;
+      /**
+       * 是否返回节点的 scrollLeft scrollTop ，
+       *
+       * 节点必须是 scroll-view 或者 viewport
+       */
+      scrollOffset?: boolean;
+      /**
+       * 指定属性名列表，
+       *
+       * 返回节点对应属性名的当前属性值
+       *
+       * 只能获得组件文档中标注的常规属性值，
+       * `id` `class` `style` 和事件绑定的属性值不可获取
+       */
+      properties?: string[];
+      /**
+       * 指定样式名列表，返回节点对应样式名的当前值
+       */
+      computedStyle?: string[]
+    }
+  }
 }

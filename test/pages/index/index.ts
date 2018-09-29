@@ -73,6 +73,27 @@ class IndexPage implements Page {
     this.setData({
       animation: anim.export()
     })
+
+    const query = swan.createSelectorQuery();
+    query.select('#test').boundingClientRect((rect) => {
+      rect.dataset;
+      rect.width;
+      rect.right;
+    }).exec((rects) => {
+      rects.forEach((rect) => {
+        rect.id;
+        rect.left;
+        rect.top;
+        rect.scrollLeft;
+      })
+    });
+
+    query.selectAll('.all').boundingClientRect((rects) => {
+      rects.forEach((rect) => {
+        rect.id;
+        rect.height;
+      })
+    }).exec();
   }
   pay() {
     swan.requestPolymerPayment({
@@ -91,6 +112,16 @@ class IndexPage implements Page {
     swan.makePhoneCall({
       phoneNumber: phone
     })
+  }
+  draw() {
+    const ctx = swan.createCanvasContext('canvas-id');
+    ctx.beginPath();
+    ctx.lineTo(100, 100);
+    ctx.setLineDash([12, 20], 10);
+    ctx.quadraticCurveTo(100, 100, 120, 150);
+    ctx.lineTo(200, 100);
+    ctx.closePath();
+    ctx.draw();
   }
 }
 
