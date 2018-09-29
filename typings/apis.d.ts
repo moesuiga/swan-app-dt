@@ -5,4 +5,5 @@
 /// <reference path="./apis/storage.d.ts" />
 /// <reference path="./apis/location.d.ts" />
 /// <reference path="./apis/interface.d.ts" />
+/// <reference path="./apis/device.d.ts" />
 /// <reference path="./apis/open.d.ts" />
