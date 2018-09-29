@@ -41,26 +41,68 @@ declare namespace Page {
       scrollTop: number;
     }): void;
     /**
-     * 用户点击右上角转发
+     * 在 Page 中定义 onShareAppMessage 函数，
+     * 设置该页面的分享信息。
+     *
+     * 用户点击分享按钮的时候会调用；
      */
     onShareAppMessage?(
-      options: any
-    ): {
-      /**
-       * 转发标题
-       * @default 当前的智能小程序的名称
-       */
-      title?: string;
-      /**
-       * 转发路径
-       * 当前页面 path ，必须是以 `/` 开头的完整路径
-       */
-      path?: string;
-    };
+      options?: {
+        /**
+         * 分享事件来源。
+         *
+         * - button：页面内转发按钮；
+         * - menu：右上角分享菜单 。
+         */
+        from: 'button' | 'menu';
+        /**
+         * 如果 from 值是 button，
+         * 则 currentTarget 是触发这次转发事件的 button，
+         * 否则为 undefined 。
+         */
+        currentTarget?: obj;
+      }
+    ): ShareReturn;
     /**
      * 错误监听函数
      */
     onError?(error: any): any;
+  }
+
+  interface ShareReturn {
+    /**
+     * 转发标题
+     * @default 当前的智能小程序的名称
+     */
+    title?: string;
+    /**
+     * 分享内容
+     */
+    content?: string;
+    /**
+     * 分享图标
+     */
+    imageUrl?: string;
+    /**
+     * 转发路径
+     * 当前页面 path ，必须是以 `/` 开头的完整路径
+     */
+    path?: string;
+    /**
+     * 接口调用成功的回调函数
+     * @param res
+     */
+    success?(res: any): void;
+    /**
+     * 接口调用失败的回调函数
+     * @param res
+     */
+    fail?(res: any): void;
+    /**
+     * 接口调用结束的回调函数（调用成功、失败都会执行）
+     * @param res
+     */
+    complete?(res: any): void;
   }
 
   interface Options extends BaseOptions {
