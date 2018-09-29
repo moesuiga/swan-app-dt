@@ -5,6 +5,7 @@
   "main": "./typings/index.d.ts",
   "scripts": {
     "prepublishOnly": "npm run lint",
+    "preversion": "npm run lint",
     "lint": "tslint --type-check --project tsconfig.json --config tslint.json test/**/*.ts"
   },
   "keywords": [
