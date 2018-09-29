@@ -73,6 +73,27 @@ class IndexPage implements Page {
     this.setData({
       animation: anim.export()
     })
+
+    const query = swan.createSelectorQuery();
+    query.select('#test').boundingClientRect((rect) => {
+      rect.dataset;
+      rect.width;
+      rect.right;
+    }).exec((rects) => {
+      rects.forEach((rect) => {
+        rect.id;
+        rect.left;
+        rect.top;
+        rect.scrollLeft;
+      })
+    });
+
+    query.selectAll('.all').boundingClientRect((rects) => {
+      rects.forEach((rect) => {
+        rect.id;
+        rect.height;
+      })
+    }).exec();
   }
   pay() {
     swan.requestPolymerPayment({

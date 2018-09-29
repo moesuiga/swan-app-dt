@@ -4,7 +4,7 @@
   "description": "基于百度小程序文档(结合微信小程序文档) 的 API DefinitelyTyped",
   "main": "./typings/index.d.ts",
   "scripts": {
-    "prepublish": "npm run lint",
+    "prepublishOnly": "npm run lint",
     "lint": "tslint --type-check --project tsconfig.json --config tslint.json test/**/*.ts"
   },
   "keywords": [
