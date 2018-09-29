@@ -1,6 +1,6 @@
 {
   "name": "swan-app-dt",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "基于百度小程序文档(结合微信小程序文档) 的 API DefinitelyTyped",
   "main": "./typings/index.d.ts",
   "scripts": {
