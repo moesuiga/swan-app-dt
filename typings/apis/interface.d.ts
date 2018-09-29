@@ -258,7 +258,7 @@ declare namespace swan {
   /**
    * 动态设置 tabBar 某一项的内容
    */
-  export function setTabBarItem(): void;
+  export function setTabBarItem(options: setTabBarItem.Options): void;
   namespace setTabBarItem {
     type Options = TabBar.CommonOptions & {
       /**

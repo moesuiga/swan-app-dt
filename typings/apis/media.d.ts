@@ -332,7 +332,7 @@ declare namespace swan {
    * @description 文件的临时路径，在智能小程序本次启动期间可以正常使用，
    * 如需持久保存，需在主动调用 swan.saveFile，在智能小程序下次启动时才能访问得到。
    */
-  export function chooseVideo(): void;
+  export function chooseVideo(options: chooseVideo.Options): void;
   namespace chooseVideo {
     type Options = {
       /**

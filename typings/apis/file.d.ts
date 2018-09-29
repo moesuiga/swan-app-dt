@@ -31,7 +31,7 @@ declare namespace swan {
   /**
    * 获取文件信息
    */
-  export function getFileInfo(): void;
+  export function getFileInfo(options: getFileInfo.Options): void;
   namespace getFileInfo {
     type Options = {
       /**

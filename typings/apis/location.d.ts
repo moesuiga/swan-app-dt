@@ -9,7 +9,7 @@ declare namespace swan {
    * 获取当前的地理位置、速度。
    * 当用户离开智能小程序后，此接口无法调用。
    */
-  export function getLocation(): void;
+  export function getLocation(options: getLocation.Options): void;
   namespace getLocation {
     type Options = {
       /**

@@ -7,7 +7,7 @@ declare namespace swan {
   /**
    * 获取系统信息
    */
-  export function getSystemInfo(): void;
+  export function getSystemInfo(options: getSystemInfo.Options): void;
   namespace getSystemInfo {
     type Options = NeedSuccessCallback<SuccessOptions>;
     interface SuccessOptions {
