@@ -141,6 +141,12 @@ interface Page extends Page.Options {
     data: { [key in keyof T]?: T[key] },
     callback?: () => void
   ): void;
+
+  /**
+   * 创建绘图上下文
+   * @param {String} canvasId <canvas />组件的`canvas-id`属性的值
+   */
+  createCanvasContext?(canvasId: string): swan.createCanvasContext.CanvasContext;
 }
 
 /**

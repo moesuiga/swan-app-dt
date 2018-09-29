@@ -113,6 +113,16 @@ class IndexPage implements Page {
       phoneNumber: phone
     })
   }
+  draw() {
+    const ctx = swan.createCanvasContext('canvas-id');
+    ctx.beginPath();
+    ctx.lineTo(100, 100);
+    ctx.setLineDash([12, 20], 10);
+    ctx.quadraticCurveTo(100, 100, 120, 150);
+    ctx.lineTo(200, 100);
+    ctx.closePath();
+    ctx.draw();
+  }
 }
 
 Page(new IndexPage());

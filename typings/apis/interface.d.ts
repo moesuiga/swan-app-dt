@@ -1,11 +1,9 @@
 /// <reference path="./index.d.ts" />
+/// <reference path="./canvas.d.ts" />
 
 // 界面
 
 declare namespace swan {
-  // @todo
-  // ======== 绘图 ======== //
-
   // ======== 交互反馈 ======== //
   /**
    * 显示消息提示框
@@ -594,8 +592,40 @@ declare namespace swan {
   }
 
   // ======== 位置 ======== //
+  /**
+   * 将页面滚动到目标位置（可以设置滚动动画时长）。
+   */
+  export function pageScrollTo(options: pageScrollTo.Options): void;
+  namespace pageScrollTo {
+    type Options = {
+      /**
+       * 滚动到页面的目标位置（单位 px）
+       */
+      scrollTop: number;
+      /**
+       * 滚动动画的时长，（单位 ms）
+       * @default 300
+       */
+      duration?: number;
+    }
+  }
 
   // ======== 下拉刷新 ======== //
+  /**
+   * 开始下拉刷新，调用后触发下拉刷新动画，
+   * 效果与用户手动下拉刷新一致。
+   */
+  export function startPullDownRefresh(options: ApiCallback<{
+    /**
+     * 接口调用结果
+     */
+    errMsg: string
+  }>): void;
+
+  /**
+   * 停止当前页面下拉刷新。
+   */
+  export function stopPullDownRefresh(): void;
 
   // ======== 节点信息 ======== //
   /**
