@@ -1,4 +1,4 @@
-/// <reference path="../apis.d.ts" />
+/// <reference path="./index.d.ts" />
 
 // 数据存储
 

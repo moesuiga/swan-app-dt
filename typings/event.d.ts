@@ -1,102 +1,119 @@
 declare namespace swan {
   /**
-   * 目前支持的事件类型有：
-   * - touchstart: 手指触摸开始
-   * - touchmove: 手指触摸后进行移动
-   * - touchend: 手指触摸结束
-   * - touchcancel: 手指触摸动作被打断，如来电提醒等
-   * - tap: 手指触摸后马上离开动作
+   * 基础事件对象
    */
-  type EventType =
-    | 'touchstart'
-    | 'touchmove'
-    | 'touchend'
-    | 'touchcancel'
-    | 'tap';
-
-  interface IEventTarget {
+  export interface BaseEvent {
     /**
-     * 事件源组件的id
+     * 事件的类型
+     */
+    type: string;
+    /**
+     * 事件触发的时间戳（毫秒）
+     */
+    timeStamp: number;
+    /**
+     * 触发事件的组件的属性值集合
+     */
+    target: EventTarget;
+    /**
+     * 当前组件的一些属性值集合
+     */
+    currentTarget: EventCurrentTarget;
+  }
+
+  /**
+   * Touch事件对象
+   */
+  export interface TouchEvent extends BaseEvent {
+    /**
+     * 触摸事件类型存在，存放当前停留在屏幕中的触摸点信息的数组
+     */
+    touches: EventTouch[];
+    /**
+     * 触摸事件类型存在，存放当前变化的触摸点信息的数组
+     */
+    changedTouches: EventTouch[];
+  }
+
+  /**
+   * 自定义事件对象
+   */
+  export interface CustomEvent extends BaseEvent {
+    detail: obj;
+  }
+
+  /**
+   * switch 组件 change 事件对象
+   */
+  export interface SwitchEvent extends BaseEvent {
+    detail: {
+      /**
+       * 官方文档给出的说明是 event.detail = { value: checked }
+       *
+       * 但现在的实际情况是 event.detail = { checked: checked }
+       *
+       * -- 2018年9月28日
+       */
+      checked: boolean;
+    }
+  }
+
+  interface EventTarget {
+    /**
+     * 触发事件组件的id
      */
     id: string;
     /**
-     * 当前组件的类型
+     * 触发事件组件的类型
      */
     tagName: string;
     /**
-     * 事件源组件上由data-开头的自定义属性组成的集合
+     * 触发事件组件上由data-开头的自定义属性组成的集合
+     *
+     * 不能有大写(大写会自动转成小写)，
+     * 最终的 - 在 dataset 中会将连字符转成驼峰式写法。
      */
     dataset: obj;
   }
 
-  interface IEventTouch {
-    // clientX: number; // 百度小程序 无该属性
-    // clientY: number; // 百度小程序 无该属性
-    // identifier: number; // 百度小程序 无该属性
-    pageX: number;
-    pageY: number;
-    screenX: number;
-    screenY: number;
+  interface EventCurrentTarget {
+    /**
+     * 事件绑定的组件的id
+     */
+    id: string;
+    /**
+     * 事件绑定的组件的类型
+     */
+    tagName: string;
+    /**
+     * 事件绑定的组件上由data-开头的自定义属性组成的集合
+     *
+     * 不能有大写(大写会自动转成小写)，
+     * 最终的 - 在 dataset 中会将连字符转成驼峰式写法。
+     */
+    dataset: obj;
   }
 
-  interface IEventCanvasTouch {
+  interface EventTouch {
+    /**
+     * 距离页面可显示区域（屏幕除去导航条）左上角的X轴的距离
+     */
+    clientX: number;
+    /**
+     * 距离页面可显示区域（屏幕除去导航条）左上角的Y轴的距离
+     */
+    clientY: number;
+    /**
+     * 触摸点的标识符
+     */
     identifier: number;
-    x: number;
-    y: number;
-  }
-
-  /**
-   * base事件参数
-   */
-  export interface IBaseEvent {
     /**
-     * 事件类型
+     * 距离文档左上角的X轴的距离
      */
-    type?: string;
-    timeStamp?: number;
+    pageX: number;
     /**
-     * 触发事件的源组件。
+     * 距离文档左上角的Y轴的距离
      */
-    target: IEventTarget;
-    /**
-     * 事件绑定的当前组件。
-     */
-    currentTarget: IEventTarget;
-  }
-
-  export interface ICustomEvent<P extends IData = IData> extends IBaseEvent {
-    /**
-     * 额外的信息
-     */
-    detail: P;
-  }
-
-  /**
-   * switch 组件 change 事件参数
-   * 官方文档的坑: 抄微信的文档 说e.detail = { value: checked }
-   * 实际打印出来是 e = { checked: checked }
-   */
-  export interface ISwitchEvent {
-    checked: boolean;
-  }
-
-  /**
-   * 触摸事件返回
-   * 并没有detail属性
-   */
-  export interface ITouchEvent<T extends IEventTouch = IEventTouch>
-    extends IBaseEvent {
-    // touches: T[]; // 百度小程序touch对象暂无该属性
-    changedTouches: T[];
-  }
-
-  /**
-   * canvas触摸事件返回
-   */
-  export interface ICanvasTouchEvent<
-    T extends IEventCanvasTouch = IEventCanvasTouch
-  > extends IBaseEvent {
-    // touches: T[];
-    changedTouches: T[];
+    pageY: number;
   }
 }

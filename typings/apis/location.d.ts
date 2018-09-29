@@ -1,4 +1,4 @@
-/// <reference path="../apis.d.ts" />
+/// <reference path="./index.d.ts" />
 
 // 位置
 
@@ -245,12 +245,16 @@ declare namespace swan {
        * 安卓上只能识别数组第一项，上下左右的 padding 一致。
        * 开发者工具暂不支持 padding 参数。
        */
-      padding?: [top, right?, bottom?, left?]
+      // padding?: [number, number?, number?, number?]
+      padding?: Pad
     }
 
-    type top = number;
-    type right = number;
-    type bottom = number;
-    type left = number;
+    interface Pad {
+      length: 1 | 2 | 3 | 4;
+      0: number;
+      1?: number;
+      2?: number;
+      3?: number;
+    }
   }
 }

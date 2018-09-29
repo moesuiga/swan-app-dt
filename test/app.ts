@@ -30,6 +30,11 @@ class MyApp implements App {
   }
   priMethod() {
     // do something
+    const map = swan.createMapContext('');
+    map.includePoints({
+      points: [],
+      padding: [1, 2, 3, 4]
+    })
   }
 }
 
