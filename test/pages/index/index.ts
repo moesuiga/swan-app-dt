@@ -33,11 +33,15 @@ interface PageData {
   animation: any;
 }
 
-interface IndexPage extends Page.Options {
+interface IndexPage extends Page {
   setData(
     data: { [key in keyof PageData]?: PageData[key] },
     callback?: () => void
   ): void;
+}
+
+interface IndexPage {
+  test: number;
 }
 
 class IndexPage implements Page {
@@ -46,6 +50,7 @@ class IndexPage implements Page {
     animation: null
   }
   onLoad(options: obj) {
+    this.test = 123;
     this.setData({
       name: 'must be string',
       // name: false
