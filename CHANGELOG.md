@@ -1,3 +1,13 @@
+<a name="2.1.2"></a>
+## [2.1.2](https://github.com/moesuiga/swan-app-dt/compare/v2.1.1...v2.1.2) (2018-10-08)
+
+
+### Bug Fixes
+
+* **Page:** Page实例下的自定义属性未检测 ([1591375](https://github.com/moesuiga/swan-app-dt/commit/1591375))
+
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/moesuiga/swan-app-dt/compare/v2.1.0...v2.1.1) (2018-09-29)
 
