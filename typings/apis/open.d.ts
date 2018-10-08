@@ -60,7 +60,7 @@ declare namespace swan {
   /**
    * 获取用户信息
    */
-  export function getUserInfo(): void;
+  export function getUserInfo(options: getUserInfo.Options): void;
   namespace getUserInfo {
     type Options = ApiCallback<SuccessOptions>;
     type SuccessOptions = {

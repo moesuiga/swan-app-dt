@@ -136,7 +136,7 @@ declare namespace Page {
   }
 }
 
-interface Page extends Page.Options {
+interface Page {
   setData<T extends Page.Options['data'] = Page.Options['data']>(
     data: { [key in keyof T]?: T[key] },
     callback?: () => void
