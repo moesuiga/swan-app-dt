@@ -1,3 +1,4 @@
 <view>
   <view>Hello, {{name}}</view>
+  <com-test tip="a test component"></com-test>
 </view>

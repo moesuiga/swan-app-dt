@@ -1,3 +1,13 @@
+<a name="2.2.0"></a>
+# [2.2.0](https://github.com/moesuiga/swan-app-dt/compare/v2.1.2...v2.2.0) (2018-10-17)
+
+
+### Features
+
+* 添加组件Component声明 ([bd9ac66](https://github.com/moesuiga/swan-app-dt/commit/bd9ac66))
+
+
+
 <a name="2.1.2"></a>
 ## [2.1.2](https://github.com/moesuiga/swan-app-dt/compare/v2.1.1...v2.1.2) (2018-10-08)
 
