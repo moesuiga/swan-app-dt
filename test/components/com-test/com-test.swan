@@ -1,0 +1,3 @@
+<view class="test-class" bindtap="tapTest">
+  {{componentName}}: {{tip}}
+</view>
