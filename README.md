@@ -17,6 +17,7 @@
 
 * [app.ts](https://github.com/moesuiga/swan-app-dt/blob/master/test/app.ts)
 * [page.ts](https://github.com/moesuiga/swan-app-dt/blob/master/test/pages/index/index.ts)
+* [component.ts](https://github.com/moesuiga/swan-app-dt/blob/master/test/components/com-test/com-test.ts)
 
 2. tsconfig 配置
 
