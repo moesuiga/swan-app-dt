@@ -105,9 +105,9 @@ declare namespace swan {
    *
    * @param {Function} callback
    */
-  export function onMemoryWarning(callback: (res: onMemoryWarning.Options) => void): void;
+  export function onMemoryWarning(callback: cb<onMemoryWarning.CallbackOptions>): void;
   namespace onMemoryWarning {
-    type Options = {
+    type CallbackOptions = {
       /**
        * 仅 Android 有该字段，
        * 对应系统内存告警等级宏定义
@@ -162,9 +162,9 @@ declare namespace swan {
    *
    * @param {Function} callback 监听的回调
    */
-  export function onAccelerometerChange(callback: (res: onAccelerometerChange.Options) => void): void;
+  export function onAccelerometerChange(callback: cb<onAccelerometerChange.CallbackOptions>): void;
   namespace onAccelerometerChange {
-    interface Options {
+    interface CallbackOptions {
       /**
        * X轴
        */
@@ -221,7 +221,7 @@ declare namespace swan {
    * 可使用`swan.stopCompass`停止监听。
    * @param {Function} callback 监听的回调
    */
-  export function onCompassChange(callback: (res: onCompassChange.CallbackOptions) => void): void;
+  export function onCompassChange(callback: cb<onCompassChange.CallbackOptions>): void;
   namespace onCompassChange {
     interface CallbackOptions {
       /**
