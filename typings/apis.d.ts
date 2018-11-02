@@ -6,4 +6,5 @@
 /// <reference path="./apis/location.d.ts" />
 /// <reference path="./apis/interface.d.ts" />
 /// <reference path="./apis/device.d.ts" />
+/// <reference path="./apis/third-platform.d.ts" />
 /// <reference path="./apis/open.d.ts" />
