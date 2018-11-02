@@ -128,6 +128,14 @@ class IndexPage implements Page {
     ctx.closePath();
     ctx.draw();
   }
+  scan() {
+    swan.scanCode({
+      success(res) {
+        console.log(res.result);
+        console.log(res.charSet);
+      }
+    })
+  }
 }
 
 Page(new IndexPage());
