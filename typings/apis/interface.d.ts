@@ -498,30 +498,33 @@ declare namespace swan {
        * 一个参数时，表示在X轴偏移 tx ，单位 px ；
        *
        * 两个参数时，表示在 X 轴偏移 tx ，在 Y 轴偏移 ty ，单位 px 。
+       *
+       * @param {Number | String} tx X轴偏移量
+       * @param {Number | String} [ty] Y轴偏移量
        */
-      translate(tx: number, ty?: number): Animation;
+      translate(tx: number | string, ty?: number | string): Animation;
       /**
        * 在 X 轴偏移 tx ，单位 px。
-       * @param {Number} tx X轴偏移量
+       * @param {Number | String} tx X轴偏移量
        */
-      translateX(tx: number): Animation;
+      translateX(tx: number | string): Animation;
       /**
        * 在 Y 轴偏移 tx ，单位 px。
-       * @param {Number} ty Y轴偏移量
+       * @param {Number | String} ty Y轴偏移量
        */
-      translateY(ty: number): Animation;
+      translateY(ty: number | string): Animation;
       /**
        * 在 Z 轴偏移 tx ，单位 px。
-       * @param {Number} tz Z轴偏移量
+       * @param {Number | String} tz Z轴偏移量
        */
-      translateZ(tz: number): Animation;
+      translateZ(tz: number | string): Animation;
       /**
        * 在 X 轴偏移 tx ，在 Y 轴偏移 ty ，在 Z 轴偏移 tz，单位 px。
-       * @param {Number} tx X轴偏移量
-       * @param {Number} ty Y轴偏移量
-       * @param {Number} tz Z轴偏移量
+       * @param {Number | String} tx X轴偏移量
+       * @param {Number | String} ty Y轴偏移量
+       * @param {Number | String} tz Z轴偏移量
        */
-      translate3d(tx: number, ty: number, tz: number): Animation;
+      translate3d(tx: number | string, ty: number | string, tz: number | string): Animation;
 
       // 倾斜
       /**

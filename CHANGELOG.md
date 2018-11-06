@@ -1,9 +1,30 @@
-<a name="2.2.0"></a>
-# [2.2.0](https://github.com/moesuiga/swan-app-dt/compare/v2.1.2...v2.2.0) (2018-10-17)
+<a name="2.2.2"></a>
+## [2.2.2](https://github.com/moesuiga/swan-app-dt/compare/v2.2.1...v2.2.2) (2018-11-06)
+
+
+### Bug Fixes
+
+* **component:** setData方法有第二个可选参数,设置完成后的回调 ([2ac6ea5](https://github.com/moesuiga/swan-app-dt/commit/2ac6ea5))
 
 
 ### Features
 
+* **animation:** 动画的translate相关方法参数可以使用字符串形式, 如 '100%' ([9f566fd](https://github.com/moesuiga/swan-app-dt/commit/9f566fd))
+* **device:** 补全设备相关接口声明 ([25b84e4](https://github.com/moesuiga/swan-app-dt/commit/25b84e4))
+* **third-platform:** 第三方平台相关接口定义声明 ([4e920d5](https://github.com/moesuiga/swan-app-dt/commit/4e920d5))
+* 添加数据分析接口声明 ([0e7c52b](https://github.com/moesuiga/swan-app-dt/commit/0e7c52b))
+* 添加更新接口声明 ([1f52ec8](https://github.com/moesuiga/swan-app-dt/commit/1f52ec8))
+* 添加调试接口声明 ([e29b483](https://github.com/moesuiga/swan-app-dt/commit/e29b483))
+
+
+
+<a name="2.2.1"></a>
+## [2.2.1](https://github.com/moesuiga/swan-app-dt/compare/v2.2.0...v2.2.1) (2018-10-17)
+
+
+### Features
+
+* 添加组件Component声明 ([7703e13](https://github.com/moesuiga/swan-app-dt/commit/7703e13))
 * 添加组件Component声明 ([bd9ac66](https://github.com/moesuiga/swan-app-dt/commit/bd9ac66))
 
 

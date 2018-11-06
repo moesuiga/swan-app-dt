@@ -140,7 +140,7 @@ declare interface Component {
    * 设置data并执行视图层渲染
    * @param newData
    */
-  setData(newData: obj): void;
+  setData(newData: obj, callback?: () => void): void;
 
   /**
    * 触发事件

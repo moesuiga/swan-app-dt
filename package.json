@@ -1,6 +1,6 @@
 {
   "name": "swan-app-dt",
-  "version": "2.2.0",
+  "version": "2.2.2",
   "description": "基于百度小程序文档(结合微信小程序文档) 的 API DefinitelyTyped",
   "main": "./typings/index.d.ts",
   "scripts": {
@@ -14,8 +14,16 @@
     "api",
     "tsd"
   ],
-  "author": "wayowe",
+  "homepage": "https://github.com/moesuiga/swan-app-dt#readme",
+  "bugs": {
+    "url": "https://github.com/moesuiga/swan-app-dt/issues",
+    "email": "wyw1121@live.com"
+  },
   "license": "MIT",
+  "author": {
+    "name": "wayowe",
+    "email": "wyw1121@live.com"
+  },
   "devDependencies": {
     "conventional-changelog-cli": "^2.0.5",
     "tslint": "^5.9.1",

@@ -35,6 +35,9 @@ class MyApp implements App {
       points: [],
       padding: [1, 2, 3, 4]
     })
+    swan.onMemoryWarning((res) => {
+      console.warn('onMemoryWarningReceive', res.level)
+    })
   }
 }
 
