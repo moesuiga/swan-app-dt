@@ -10,3 +10,4 @@
 /// <reference path="./apis/open.d.ts" />
 /// <reference path="./apis/update.d.ts" />
 /// <reference path="./apis/debug.d.ts" />
+/// <reference path="./apis/analyze.d.ts" />
