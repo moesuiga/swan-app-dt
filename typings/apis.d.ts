@@ -9,3 +9,4 @@
 /// <reference path="./apis/third-platform.d.ts" />
 /// <reference path="./apis/open.d.ts" />
 /// <reference path="./apis/update.d.ts" />
+/// <reference path="./apis/debug.d.ts" />
